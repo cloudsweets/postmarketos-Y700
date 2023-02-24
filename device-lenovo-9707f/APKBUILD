@@ -1,0 +1,46 @@
+# Reference: <https://postmarketos.org/devicepkg>
+pkgname=device-lenovo-9707f
+pkgdesc="Lenovo Legion Y700"
+pkgver=0.1
+pkgrel=0
+url="https://postmarketos.org"
+license="MIT"
+arch="aarch64"
+options="!check !archcheck"
+depends="
+	linux-postmarketos-qcom-sm8250
+	make-dynpart-mappings
+	mesa-dri-gallium
+	mkbootimg
+	postmarketos-base
+"
+makedepends="devicepkg-dev"
+source="deviceinfo"
+
+build() {
+	devicepkg_build $startdir $pkgname
+}
+
+package() {
+	devicepkg_package $startdir $pkgname
+}
+
+nonfree_firmware() {
+	pkgdesc="Firmware for GPU, WiFi, etc."
+	depends="
+		firmware-lenovo-9707f-adreno
+		firmware-lenovo-9707f-adsp
+		firmware-lenovo-9707f-cdsp
+		firmware-lenovo-9707f-ipa
+		firmware-lenovo-9707f-bluetooth
+		firmware-lenovo-9707f-venus
+		firmware-lenovo-9707f-slpi
+		firmware-lenovo-9707f-touchscreen
+		linux-firmware-ath11k
+		"
+	mkdir "$subpkgdir"
+}
+
+sha512sums="
+b598f73ea58c78855483deeacd92eccd86c31a743a23bb2a5cb4bab2ae844f6d9b878da7b22257b6a8371e51d1d5b1f207c385bc6742a6d33fac708a372fd8f0  deviceinfo
+"

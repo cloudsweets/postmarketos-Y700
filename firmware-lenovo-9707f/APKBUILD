@@ -1,0 +1,87 @@
+pkgname=firmware-lenovo-9707f
+pkgver=20220422
+pkgrel=0
+pkgdesc="Firmware for Lenovo Legion Y700"
+subpackages="
+	$pkgname-adreno
+	$pkgname-adsp
+	$pkgname-cdsp
+	$pkgname-venus
+	$pkgname-slpi
+	$pkgname-bluetooth
+	$pkgname-touchscreen
+	"
+url="https://github.com/cloudsweets/firmware-lenovo-9707f.git"
+arch="aarch64"
+license="proprietary"
+options="!check !strip !archcheck !tracedeps pmb:cross-native"
+_commit="59286704bffd40d94035b67536808143ea4a14de"
+source="https://github.com/cloudsweets/firmware-lenovo-9707f/archive/$_commit/firmware-lenovo-9707f-$_commit.tar.gz"
+builddir="$srcdir/9707f-firmware-$_commit"
+
+package() {
+	# parent package is empty
+	mkdir -p "$pkgdir"
+}
+
+adreno() {
+	pkgdesc="Lenovo Legion Y700 adreno firmware"
+
+	install -Dm644 "$builddir"/a650_zap.* -t \
+		"$subpkgdir/lib/firmware/qcom/"
+}
+
+adsp() {
+	pkgdesc="Lenovo Legion Y700 adsp firmware"
+
+	install -Dm644 "$builddir"/adsp* -t \
+		"$subpkgdir/lib/firmware/qcom/sm8250/9707f/"
+}
+
+cdsp() {
+	pkgdesc="Lenovo Legion Y700 cdsp firmware"
+
+	install -Dm644 "$builddir"/cdsp* -t \
+		"$subpkgdir/lib/firmware/qcom/sm8250/9707f/"
+}
+
+ipa() {
+	pkgdesc="Lenovo Legion Y700 ipa firmware"
+
+	install -Dm644 "$builddir"/ipa_fws.* -t \
+		"$subpkgdir/lib/firmware/qcom/sm8250/9707f/"
+}
+
+venus() {
+	pkgdesc="Lenovo Legion Y700 venus firmware"
+
+	install -Dm644 "$builddir"/venus.* -t \
+		"$subpkgdir/lib/firmware/qcom/sm8250/9707f/"
+}
+
+slpi() {
+	pkgdesc="Lenovo Legion Y700 slpi firmware"
+
+	install -Dm644 "$builddir"/slpi* -t \
+		"$subpkgdir/lib/firmware/qcom/sm8250/9707f/"
+}
+
+bluetooth() {
+	pkgdesc="Lenovo Legion Y700 bluetooth firmware"
+
+	install -Dm644 "$builddir"/htbtfw20.tlv -t \
+		"$subpkgdir/lib/firmware/qca/"
+	install -Dm644 "$builddir"/htnv20.bin -t \
+		"$subpkgdir/lib/firmware/qca/sm8250/9707f/"
+}
+
+touchscreen() {
+	pkgdesc="Lenovo Legion Y700 touchscreen firmware"
+
+	install -Dm644 "$builddir"/novatek_nt36523_fw.bin -t \
+		"$subpkgdir/lib/firmware/"
+}
+
+sha512sums="
+afc8788c808fbef4b4a515dc737b93c375c31aafe938e14a0e43de0a1b6a6a96d4957f25d52c1de5a4f82f5dc5361263247a8d0304092ef9eb44d7c89a6ff2e1  firmware-lenovo-9707f-59286704bffd40d94035b67536808143ea4a14de.tar.gz
+"
