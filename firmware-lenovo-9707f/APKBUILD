@@ -28,7 +28,7 @@ adreno() {
 	pkgdesc="Lenovo Legion Y700 adreno firmware"
 
 	install -Dm644 "$builddir"/a650_zap.* -t \
-		"$subpkgdir/lib/firmware/qcom/"
+		"$subpkgdir/lib/firmware/qcom/sm8250/9707f/"
 }
 
 adsp() {
